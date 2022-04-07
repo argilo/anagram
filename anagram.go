@@ -234,8 +234,7 @@ func HandleRequest(ctx context.Context, event MyEvent) (MyResponse, error) {
 
 			if err != nil {
 				return MyResponse{400, "", map[string]string{
-					"Content-Type":                "text/html",
-					"Access-Control-Allow-Origin": "*",
+					"Content-Type": "text/html",
 				}}, nil
 			}
 
@@ -261,8 +260,7 @@ func HandleRequest(ctx context.Context, event MyEvent) (MyResponse, error) {
 	}
 
 	return MyResponse{200, strings.Join(results, "<br>\n"), map[string]string{
-		"Content-Type":                "text/html",
-		"Access-Control-Allow-Origin": "*",
+		"Content-Type": "text/html",
 	}}, nil
 }
 
