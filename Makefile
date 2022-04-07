@@ -27,11 +27,7 @@ dict.dwg: dawg
 	LC_ALL=C sort dict1.txt | uniq > dict2.txt && rm dict1.txt
 	./dawg dict2.txt dict && rm dict2.txt
 
-godeps:
-	go get github.com/aws/aws-lambda-go/lambda
-	go get golang.org/x/text/encoding/charmap
-
-anagram: anagram.go godeps
+anagram: anagram.go
 	go build anagram.go
 
 lambda.zip: anagram dict.dwg
