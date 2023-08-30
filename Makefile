@@ -1,5 +1,5 @@
 #
-# Copyright 2019 Clayton Smith (argilo@gmail.com)
+# Copyright 2019,2023 Clayton Smith (argilo@gmail.com)
 #
 # This file is part of anagram.
 #
@@ -27,14 +27,14 @@ dict.dwg: dawg
 	LC_ALL=C sort dict1.txt | uniq > dict2.txt && rm dict1.txt
 	./dawg dict2.txt dict && rm dict2.txt
 
-anagram: anagram.go
-	go build anagram.go
+bootstrap: anagram.go
+	GOARCH=arm64 GOOS=linux go build -tags lambda.norpc -o bootstrap anagram.go
 
-lambda.zip: anagram dict.dwg
-	zip lambda.zip anagram dict.dwg
+lambda.zip: bootstrap dict.dwg
+	zip lambda.zip bootstrap dict.dwg
 
 clean:
 	rm -f dawg
 	rm -f dict.dwg
-	rm -f anagram
+	rm -f bootstrap
 	rm -f lambda.zip
